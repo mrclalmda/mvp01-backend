@@ -5,10 +5,10 @@ API feita em Python utilizando FastAPI e SQLite. Permite inclusão, deleção e 
 
 ## Requisitos
 
-Python 3
-Uvicorn
-FastAPI
-SQLite
+-Python 3
+-Uvicorn
+-FastAPI
+-SQLite
 
 ## Instalação
 

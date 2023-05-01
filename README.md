@@ -2,9 +2,7 @@
 
 Projeto faz parte do MVP da Sprint I: Desenvolvimento Full Stack Básico do curso de Engenharia de Software da PUC-Rio.
 
-API feita em Python utilizando FastAPI e SQLite. 
-
-Permite inclusão, deleção e leitura de itens no banco de dados.
+Objetivo é conhecer os fundamentos do desenvolvimento web com as operações básicas de inclusão, deleção e leitura de itens no banco de dados.
 
 ## Requisitos
 

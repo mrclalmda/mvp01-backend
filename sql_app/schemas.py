@@ -1,35 +1,22 @@
 from pydantic import BaseModel
+from typing import List
+
+class AstroBase(BaseModel):
+    name: str
+    distance: str
+    type: str
 
 
-class ItemBase(BaseModel):
-    title: str
-    description: str | None = None
-
-
-class ItemCreate(ItemBase):
+class AstroCreate(AstroBase):
     pass
 
 
-class Item(ItemBase):
+class Astro(AstroBase):
     id: int
-    owner_id: int
 
     class Config:
         orm_mode = True
 
 
-class UserBase(BaseModel):
-    email: str
-
-
-class UserCreate(UserBase):
-    password: str
-
-
-class User(UserBase):
-    id: int
-    is_active: bool
-    items: list[Item] = []
-
-    class Config:
-        orm_mode = True
+class AstroList(BaseModel):
+    __root__: List[Astro] = []

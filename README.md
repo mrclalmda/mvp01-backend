@@ -1,14 +1,17 @@
 # Corpos Celestes
 
 Projeto faz parte do MVP da Sprint I: Desenvolvimento Full Stack Básico do curso de Engenharia de Software da PUC-Rio.
-API feita em Python utilizando FastAPI e SQLite. Permite inclusão, deleção e leitura de itens no banco de dados.
+
+API feita em Python utilizando FastAPI e SQLite. 
+
+Permite inclusão, deleção e leitura de itens no banco de dados.
 
 ## Requisitos
 
--Python 3
--Uvicorn
--FastAPI
--SQLite
+- Python 3
+- Uvicorn
+- FastAPI
+- SQLite
 
 ## Instalação
 
@@ -18,7 +21,7 @@ Clone o repositório para sua máquina e na pasta raíz do projeto execute o seg
 
 ## Utilização
 
-A utilização da API foi projetada para requisições no front-end, para colocar o servidor no ar, basta executar o seguinte comando na raíz do projeto:
+Para colocar o servidor no ar, basta executar o seguinte comando na raíz do projeto:
 
 `uvicorn main:app`
 

@@ -13,13 +13,17 @@ SQLite
 ## Instalação
 
 Clone o repositório para sua máquina e na pasta raíz do projeto execute o seguinte comando:
+
 `pip install fastapi uvicorn sqlite`
 
 ## Utilização
 
-A utilização da API foi projetada para requisições no front-end, para colocar o servidor no ar, basta executar o seguinte comando na raíz do projeto:`uvicorn main:app`
+A utilização da API foi projetada para requisições no front-end, para colocar o servidor no ar, basta executar o seguinte comando na raíz do projeto:
+
+`uvicorn main:app`
 
 O FastAPI nos disponibiliza uma documentação nos padrões OpenAPI, que pode ser acessada e utilizada no seguinte endereço:
+
 `http://localhost:8000/docs`
 
 ## Contribuindo

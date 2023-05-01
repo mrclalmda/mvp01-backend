@@ -1,22 +1,16 @@
-from pydantic import BaseModel
 from typing import List
+from pydantic import BaseModel
 
 class AstroBase(BaseModel):
     name: str
-    distance: str
+    distance: int
     type: str
-
 
 class AstroCreate(AstroBase):
     pass
 
-
-class Astro(AstroBase):
+class AstroRead(AstroBase):
     id: int
 
     class Config:
         orm_mode = True
-
-
-class AstroList(BaseModel):
-    __root__: List[Astro] = []

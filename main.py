@@ -1,24 +1,63 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
+from database import SessionLocal, engine
+from models import Astro
+from schemas import AstroCreate, AstroRead
+from typing import List
 
-class Item(BaseModel):
-    name: str
-    description: str | None = None
-    price: float
-    tax: float | None = None
 
+Astro.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+# Dependen
+origins = ["http://localhost",    "http://localhost:5500",
+           "http://127.0.0.1",    "http://127.0.0.1:5500"]
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.get("/items/{item_id}")
-async def read_item(item_id: int):
-    return {"item_id": item_id}
 
-@app.post("/items/")
-async def create_item(item: Item):
-    return item
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+@app.get("/", response_model=List[AstroRead])
+def read_astro(db: Session = Depends(get_db)):
+    astros = db.query(Astro).all()
+    return astros
+
+
+@app.post("/astro/", response_model=AstroRead)
+def create_astro(astro: AstroCreate, db: Session = Depends(get_db)):
+    db_astro = Astro(name=astro.name, distance=astro.distance,
+                     type=astro.type)
+    db.add(db_astro)
+    db.commit()
+    db.refresh(db_astro)
+    return {
+        "id": db_astro.id,
+        "name": db_astro.name,
+        "distance": db_astro.distance,
+        "type": db_astro.type
+    }
+
+
+@app.delete("/astro/{astro_id}")
+def delete_astro(astro_id: int, db: Session = Depends(get_db)):
+    db_astro = db.query(Astro).filter(Astro.id == astro_id).first()
+    if db_astro is None:
+        raise HTTPException(status_code=404, detail="Astro not found")
+    db.delete(db_astro)
+    db.commit()
+    return {"message": "Astro deleted"}
